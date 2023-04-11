@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<style>
+
+ .container {
+     height :600px;
+     width : 500px;
+     padding: 20px 20px;
+     background-color: black;
+}
+
+.row {
+    height: 550px;
+    width: 450px;
+    padding: 20px 20px;
+    background-color: white;
+    
+    
+}
+.box-1 {
+    height : 500px;
+    width: 400px;
+    padding: 20px 20px;
+    background-color:pink ;
+    
+}
+.box-2 {
+    height: 450px;
+    width: 350;
+    padding: 20px 20px;
+    background-color: blanchedalmond;
+    
+}
+.box-3{
+    height: 400px;
+    width: 300px;
+    padding: 20px 20px;
+    background-color: blue ;
+    
+}
+.box-4 {
+    height: 350px;
+    width: 250px;
+    padding: 20px  20px;
+    background-color: green;
+   
+}
+.box-5 {
+    height: 300px;
+    width: 200px;
+    padding: 20px 20px ;
+    background-color: orange;
+    
+}
+.box-6 {
+    height: 250px;
+    width: 150px;
+    padding: 20px 20px;
+    background-color: rgb(131, 226, 248);
+    
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="box-1">
+             <div class="box-2">
+                 <div class="box-3">
+                     <div class="box-4">
+                         <div class="box-5">
+                             
+                        </div>
+
+                     </div>
+
+                 </div>
+
+             </div>
+        </div>
+    </div>
+</div> 
+<script>
+
+$(document).ready(function(){
+    $(".container").on("click", ".box-1, .box-2, .box-3, .box-4, .box-5, .box-6", function(){
+        
+        let randomColor = getRandomColor();
+        
+        
+        $(".container > .row > div").css("background-color", randomColor);
+        $(this).css("background-color", getRandomColor());
+    });
+
+    
+    // function getRandomColor() {
+    //     var letters = '0123456';
+    //     var color = '#';
+    //     for (var i = 0; i < 6; i++) {
+    //         color += letters[Math.floor(Math.random() * 4)];
+    //     }
+    //     return color;
+    // }
+});
+</script>
+</script>
+</body>
+</html>
