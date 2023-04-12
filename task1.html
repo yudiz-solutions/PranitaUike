@@ -4,72 +4,42 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <style>
 
- .container {
-     height :600px;
-     width : 500px;
-     padding-top: 20px;
-     padding-left: 20px;
-     background-color: aquamarine;
-     
- }
-.row {
-    height: 550px;
-    width: 450px;
-    padding: 20px 20px;
-    background-color: brown;
-    
-    
-}
-.box-1 {
-    height : 500px;
-    width: 400px;
-    padding: 20px 20px;
-    background-color:pink ;
-    
-}
-.box-2 {
-   height: 450px;
-   width: 350;
-    padding: 20px 20px ;
-    background-color: blanchedalmond;
-    
-}
-.box-3{
-    height: 400px;
-    width: 300px;
-    padding: 20px 20px;
-    background-color: blue ;
-    
-}
-.box-4 {
-    height: 350px;
-    width: 250px;
-    padding: 20px 20px;
-    background-color: green;
-   
-}
-.box-5 {
-    height: 300px;
-    width: 200px;
-    padding: 20px 20px;
-    background-color: orange;
-    
-}
+      div{
+            height: 80%;
+            width: 80%;
+            padding: 20px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+</style>
+
+  <script>
+    $(document).ready(function () {
+        $("div").click(function () {
+            $(this).css("background-color", "yellow");
+            $(this).children().css("background-color", "green");
+            $(this).parent("div").css("background-color", "pink");
+            event.stopPropagation();
+        });
+ });
+
+</script>
+
 
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="box-1">
-             <div class="box-2">
-                 <div class="box-3">
-                     <div class="box-4">
-                         <div class="box-5">
-                            
-                        </div>
+<div>
+    <div >
+        <div >
+             <div>
+                 <div >
+                     <div >
+                        <div>
 
-                     </div>
+                        </div>
+                        
+                        </div>
 
                  </div>
 
@@ -77,34 +47,7 @@
         </div>
     </div>
 </div> 
-<script>
 
-    $(document).ready(function(){
-        $(".container").click(function(){
-           $(this).css("background-color","white");
-        });
-        $(".row").click(function(){
-           $(this).css("background-color","white");
-        });
-        $(".box-1").click(function(){
-            $(this).css("background-color", "white");
-        });
-        $(".box-2").click(function(){
-            $(this).css("background-color", "white");
-        });
-        $(".box-3").click(function(){
-            $(this).css("background-color", "white");
-        });
-        $(".box-4").click(function(){
-            $(this).css("background-color", "white");
-        });
-        $(".box-5").click(function(){
-            $(this).css("background-color", "white");
-        });
-        $(".box-6").click(function(){
-            $(this).css("background-color","white");
-        });
-    });
-    </script>
-</body>
+
+    </body>
 </html>
