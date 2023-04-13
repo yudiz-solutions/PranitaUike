@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thread>
+            <tr>
+                <th>Id</th>
+                <th>title</th>
+                <th>body</th>
+            </tr>
+        </thread>
+        <tbody id="tabledata">
+
+        </tbody>
+    </table>
+    
+    <form id="myForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+        <br>
+        <label for="body">Body:</label>
+        <input type="text" id="body" name="body">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    let tableBody = $('#tabledata');
+                    var row = '';
+                    $.each(data, function (key, item) {
+
+                        row += '<tr><td>' + item.id + '<td>' + item.title + '</td><td>' + item.body + '</td></tr>';
+
+                    });
+
+                    $('#tabledata').html(row);
+                },
+            })
+        });
+
+        $('#myForm').submit(function (event) {
+            event.preventDefault();
+            var title = $('#title').val();
+            var body = $('#body').val();
+
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    title: title,
+                    body: body,
+                },
+                success: function (data) {
+                    console.log(data);
+                    
+                    var row = '<tr><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.body + '</td></tr>';
+                    $('#tabledata').append(row);
+                },
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
