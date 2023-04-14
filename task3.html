@@ -1,115 +1,198 @@
 <!DOCTYPE html>
-<html>
+    <html>
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    <head>
+        <title></title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
 
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid black;
-        }
-    </style>
-</head>
-
-<body>
-    <form id="myForm">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title">
-        <br>
-        <label for="body">Body:</label>
-        <input type="text" id="body" name="body">
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Body</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="tabledata">
-        </tbody>
-    </table>
-
-    <script>
-        $(document).ready(function () {
-
+    <body>
+        <style>
+            table ,th,
+            td{
             
-            function fetchData() {
+                
+                color: solid black;
+            
+    
+            
+                padding: 8px;
+                text-align: center;
+                border: 1px solid black;
+                
+            }
+        #title,#body{
+            position:center;
+             width: auto;
+             padding : 12px 20px;
+             margin : 8px 0;
+             box-sizing: border-box;
+        }
+
+        .delete{
+            margin: 10px ; 
+            display: flex;
+            background-color: red;     
+        }
+        .edit{
+            background-color: green;
+        }
+           
+        </style>
+    </head>
+    
+    <body>
+        <form id="myForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+            <br>
+            <label for="body">Body:</label>
+            <input type="text" id="body" name="body">
+            <br>
+            <br>
+            <input type="submit" value="Submit" >
+            
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Body</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tabledata">
+            </tbody>
+        </table>
+        
+    
+        <script>
+            $(document).ready(function () {
+
+                
+                function fetchPosts() {
                 $.ajax({
                     url: 'https://jsonplaceholder.typicode.com/posts',
                     type: 'GET',
                     dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        let tableBody = $('#tabledata');
-                        var row = '';
-                        $.each(data, function (key, post) {
-                            row += '<tr><td>' + post.id + '</td><td>' + post.title + '</td><td>' + post.body + '</td><td><button class="delete" data-id="' + post.id + '">DELETE</button></td></tr>';
+                    success: function (posts) {
+
+                        let rows = '';
+                        $.each(posts, function (index, post) {
+                            rows += '<tr data-id="' + post.id + '"><td>' + post.id + '</td><td>' + post.title + '</td><td>' + post.body + '</td><td><button class="edit" data-id="' + post.id + '">EDIT</button> <button class="delete" data-id="' + post.id + '">DELETE</button></td></tr>';
                         });
-                        tableBody.html(row);
-                    },
-                });
-            }
-
-            
-            fetchData();
-
-            
-            $('#myForm').on('submit', function (event) {
-                event.preventDefault(); 
-                
-                let formData = $(this).serialize();
-                
-                let title = $('#title').val();
-                let body = $('#body').val();
-
-                
-                $.ajax({
-                    url: 'https://jsonplaceholder.typicode.com/posts',
-                    type: 'POST',
-                    data: {
-                        title: title,
-                        body: body
-                    },
-                    success: function (post) {
-                        
-                        let newRow = '<tr><td>' + post.id + '</td><td>' + post.title + '</td><td>' + post.body + '</td><td><button class="delete" data-id="' + post.id + '">DELETE</button></td></tr>';
-                        $('#tabledata').append(newRow);
-
-                        
-                        $('#title').val('');
-                        $('#body').val('');
+                        $('#tabledata ').html(rows);
                     }
                 });
+            }
+            fetchPosts();
+
+                $('#myForm').on('submit', function (event) {
+                    event.preventDefault();
+
+                    let formData = $(this).serialize();
+
+
+
+
+                    let title = $('#title').val();
+                    let body = $('#body').val();
+
+
+                    $.ajax({
+                        url: 'https://jsonplaceholder.typicode.com/posts',
+                        type: 'POST',
+                        data: {
+                            title: title,
+                            body: body,
+                            
+                        },
+
+
+                        success: function (post) {
+
+                            let newRow = '<tr data-id="' + post.id + '"><td>' + post.id + '</td><td>' + post.title + '</td><td>' + post.body + '</td><td><button class="edit" data-id="' + post.id + '">EDIT</button> <button class="delete" data-id="' + post.id + '">DELETE</button></td></tr>';
+                            $('#tabledata').append(newRow);
+
+
+                            $('#title').val('');
+                            $('#body').val('');
+                        }
+                    });
+                });
+
+
             });
 
-            
+
+
             $(document).on('click', '.delete', function () {
                 let postId = $(this).data('id');
 
-                
                 $.ajax({
                     url: 'https://jsonplaceholder.typicode.com/posts/' + postId,
                     type: 'DELETE',
                     success: function () {
-                        
-                        $(this).closest('tr').remove();
+
+                        $('#tabledata').find('tr[data-id="' + postId + '"]').remove();
                     }
                 });
             });
-        });
-    </script>
-</body>
 
-</html>
+
+            $(document).on('click', '.edit', function () {
+                let postId = $(this).data('id');
+
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts/' + postId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (post) {
+
+                        $('#title').val(post.title);
+                        $('#body').val(post.body);
+
+
+                        $('#myForm').off('submit').on('submit', function (event) {
+                            event.preventDefault();
+
+
+
+                            let title = $('#title').val();
+                            let body = $('#body').val();
+
+
+                            $.ajax({
+                                url: 'https://jsonplaceholder.typicode.com/posts/' + postId,
+                                type: 'PUT',
+                                data: {
+                                    title: title,
+                                    body: body
+                                },
+                                success: function (updatedPost) {
+
+
+                                    let editedRow = '<tr><td>' + updatedPost.id + '</td><td>' + updatedPost.title + '</td><td>' + updatedPost.body + '</td><td><button class="edit" data-id="' + updatedPost.id + '">EDIT</button> <button class="delete" data-id="' + updatedPost.id + '">DELETE</button></td></tr>';
+                                    $('#tabledata').find('tr[data-id="' + postId + '"]').replaceWith(editedRow);
+
+
+                                    $('#title').val('');
+                                    $('#body').val('');
+
+
+                                    $('#myForm').off('submit').on('submit', function (event) {
+
+                                    });
+                                }
+                            });
+                        });
+                    }
+            });
+            });
+
+        </script>
+    </body>
+
+    </html>
