@@ -156,8 +156,8 @@ if (isset($_POST['submit'])) {
                 </div>
 
                         <br><br>
-
-
+                            
+                            
                             <label class="form-lable">Active Social Media:</lable><br>
                             <input type="checkbox" id="social_media" name="accounts" value = "" >
                             <label for="Instagram" value = "instagram">Instagram</label><br>

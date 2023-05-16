@@ -8,14 +8,14 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $gender = $_POST['gender'];
 
-    $sql = "UPDATE 'emp_details' SET 'first_name' = '$first_name','last_name'='$last_name','email'='$email','gender'='$gender' WHERE id= $id";
+    $sql = "UPDATE emp_details SET first_name = '$first_name',last_name='$last_name',email='$email',gender='$gender' WHERE id= $id";
 
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header("Location : index.php?msg=Data updated successfully");
+        header("Location: index.php?msg=Data updated successfully");
     } else {
-        echo "Failed :" . mysqli_error($conn);
+        echo "Failed:" . mysqli_error($conn);
     }
 }
 ?>
