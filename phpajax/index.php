@@ -3,11 +3,11 @@ require 'db_conn.php';
 require 'function1.php';
 if(isset($_SESSION['id'])){
     $id = $_SESSION["id"];
-    $user = mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM user_details WHERE id = $id"));
+    $user = mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM user WHERE id = $id"));
 }else{
 
 
-	header("Location: register.php");
+	header("Location: logout.php");
 }
 
 ?>

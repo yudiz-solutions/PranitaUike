@@ -1,10 +1,9 @@
-<?php
-ob_start(); 
-require 'db_conn.php';
+<?php 
+include 'db_conn.php';
 session_start();
 
 if(isset($_SESSION['email'])){
-	header("Location: logout.php");
+	header("Location: index.php");
 	exit();
 }
 
@@ -12,7 +11,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 
-	$sql = "SELECT * FROM user_details WHERE email='$email'";
+	$sql = "SELECT * FROM user WHERE email='$email'";
 	$result = mysqli_query($conn, $sql);
 
 	if(mysqli_affected_rows($conn) == 1){
@@ -29,7 +28,6 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 		echo "Email not found";
 	}
 }
-ob_end_flush();
 ?>
 
 <html>
@@ -42,14 +40,19 @@ ob_end_flush();
 </head>
 <body>
     <a href="register.php"> Go To Register </a>
-    <?php require 'script.php'; ?>
+    <?php include 'script.php'; ?>
 	<h2>Login</h2>
-	<form method="POST">
+	<form  autcomplete = "off" method="POST">
 		<label>Email:</label><br>
 		<input type="email" name="email"><br>
 		<label>Password:</label><br>
 		<input type="password" name="password"><br>
-		<input type="submit" value="Login" class= 'btn btn-info'>
+		<br>
+		<div>
+		<!-- <button type="button" class="btn btn-primary" onclick="submitData();">login</button> -->
+		
+		 <input type="submit" value="Login" class= 'btn btn-info'>
+	</div>
 	</form>
 </body>
 </html> 

@@ -1,5 +1,5 @@
 <?php
-include 'db_conn.php'; 
+// include 'db_conn.php'; 
 ?>
 <script src="https://ajax.ggogleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
@@ -37,4 +37,31 @@ function submitData(){
     });
 }
 
+</script>
+
+<script>
+$(document).ready(function() {
+  $("#myform").submit(function(e) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Serialize the form data
+    var formData = new FormData(this);
+
+    // Send an AJAX request 
+    $.ajax({
+      url: "register.php",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        // Handle the response 
+        alert(response);
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr.responseText);
+      }
+    });
+  });
+});
 </script>

@@ -1,10 +1,52 @@
-<?php 
-require 'db_conn.php';
-if(isset($_SESSION['id'])){
-	header("Location: index.php");
+<?php
+include "db_conn.php";
+
+$first_name = isset($_POST['first_name']) ? $_POST['first_name'] : '';
+$last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
+$username = isset($_POST['username']) ? $_POST['username'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+$dob = isset($_POST['dob']) ? $_POST['dob'] : '';
+if (isset($_POST['hobby']) && is_array($_POST['hobby'])) {
+	    $hobby = implode(',', $_POST['hobby']);
+	} else {
+	    $hobby = '';
+	}
+$gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+$country = isset($_POST['country']) ? $_POST['country'] : '';
+$message = isset($_POST['message']) ? $_POST['message'] : '';
+ $profile_image = '';
+
+if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+    $profile_image = $_FILES['profile_image']['name'];
+    $tmp_name = $_FILES['profile_image']['tmp_name'];
+    $upload_dir = 'uploads/';
+    $target_file = $upload_dir . basename($profile_image);
+    move_uploaded_file($tmp_name, $target_file);
+} else {
+    $profile_image = ''; // or handle the case where no file was uploaded
 }
 
+
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+$sql = "INSERT INTO user(`first_name`, `last_name`, `username`, `email`, `password`, `confirm_password`, `dob`, `hobby`, `gender`, `country`, `message`, `profile_image`) 
+VALUES ('$first_name','$last_name','$username','$email','$password','$confirm_password','$dob','$hobby','$gender','$country','$message','$profile_image')";
+
+if (mysqli_query($conn, $sql)) {
+    //  echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -17,19 +59,13 @@ if(isset($_SESSION['id'])){
 </head> 
 
 <body>
-
-<head>
-	<title>PHP & jQuery Mix Demo</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-
-<body>
     <a href="login.php" class="btn btn-primary ">Login</a>
 	<a href="user_registerpanel.php" class="btn btn-primary ">User Data</a>
+	<br><br>
 
-	<?php   require 'script.php';
+	<?php  include 'script.php';
     ?>
-	<form id="demo-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+	<form  autocomplete ="off" id="myform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 		<div>
 			<label for="first_name">First Name*</label>
 			<input type="text" name="first_name" id="first_name" required>
@@ -96,9 +132,9 @@ if(isset($_SESSION['id'])){
 		<br>
 		<div>
 			<label for="profile-image">Profile Image</label>
-			<input type="file" name="profile_image" id="profile-image">
+			<input type="file" name="profile_image" id="profile_image">
 		</div>
-		<br>
+		<br><br>
 		<div>
 			<input type="submit" value="Submit" class="btn btn-success">
 		
@@ -107,45 +143,5 @@ if(isset($_SESSION['id'])){
 	</form>
 </body>
 </html>
-
-
-<?php
-include "db_conn.php";
-
-$first_name = isset($_POST['first_name']) ? $_POST['first_name'] : '';
-$last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$email = isset($_POST['email']) ? $_POST['email'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
-$confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
-$dob = isset($_POST['dob']) ? $_POST['dob'] : '';
-if (isset($_POST['hobby']) && is_array($_POST['hobby'])) {
-	    $hobby = implode(',', $_POST['hobby']);
-	} else {
-	    $hobby = '';
-	}
-$gender = isset($_POST['gender']) ? $_POST['gender'] : '';
-$country = isset($_POST['country']) ? $_POST['country'] : '';
-$message = isset($_POST['message']) ? $_POST['message'] : '';
-$profile_image = isset($_POST['profile_image']) ? $_POST['profile_image'] : '';
-
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-
-$sql = "INSERT INTO `user_details`(`first_name`, `last_name`, `username`, `email`, `password`, `confirm_password`, `dob`, `hobby`, `gender`, `country`, `message`, `profile_image`) 
-VALUES ('$first_name','$last_name','$username','$email','$password','$confirm_password','$dob','$hobby','$gender','$country','$message','$profile_image')";
-
-if (mysqli_query($conn, $sql)) {
-    //  echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-mysqli_close($conn);
-?>
-
-
 
 

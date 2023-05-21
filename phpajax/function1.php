@@ -34,7 +34,7 @@ function register(){
     }
     
     
-    $user = mysqli_query($conn,"SELECT * FROM user_details WHERE email = '$email'");
+    $user = mysqli_query($conn,"SELECT * FROM user WHERE email = '$email'");
     if(mysqli_num_rows($user)>0){
         echo "email has already taken";
         exit;
@@ -47,27 +47,25 @@ function login(){
 
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
-    
-    $user = mysqli_query($conn,"SELECT * FROM user_details WHERE email = '$email'");
-    if(mysqli_num_rows($user)>0){
+
+    $user = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
+    if(mysqli_num_rows($user) > 0){
         $row = mysqli_fetch_assoc($user);
-        if($password == $row["password"]){
+        if(password_verify($password, $row["password"])){
             echo "Login successful";
             $_SESSION["login"] = true;
             $_SESSION["id"] = $row["id"];
-
+            header("Location: index.php");
+            exit();
         }else{
-            echo "wrong password";
+            echo "Wrong password";
             exit;
         }
-        
     }else{
-        echo "User not Registered";
+        echo "User not registered";
         exit;
     }
-     
-
 }
+
 ?>
  

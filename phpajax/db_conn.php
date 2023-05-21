@@ -12,7 +12,7 @@
           $database = "phpdemo";
           
           $conn = new mysqli($servername,$username,$password,$database);
-        //    echo "connected";
+          //  echo "connected";
         //   var_dump($connection);
           if($conn->connect_error){
            die("connection failed :" . $conn->connect_error);
