@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "INSERT INTO `user`(`first_name`, `last_name`, `username`, `email`, `password`, `confirm_password`, `dob`, `hobby`, `gender`, `country`, `profile_image`)
             VALUES ('$first_name','$last_name','$username','$email','$password','$confirm_password','$dob','$hobby','$gender','$country','$folder')";
-    
+
     $result = mysqli_query($conn, $sql);
-    
+
     if ($result) {
         echo "Inserted successfully";
     } else {
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -111,14 +112,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
         </div>
         <br>
+
         <div>
             <label for="profile_image">Profile Picture</label>
-            <input type="file" name="profile_image" id="profile_image">
+            <input type="file" name="profile_image" id="profile_image" style="display: none;">
+            <input type="hidden" name="image" id="image" value="">
+            <button type="button" id="upload-button">Upload Image</button>
         </div>
+
         <br>
         <div>
             <input type="submit" name="submit" value="Submit">
         </div>
     </form>
+
+
+    <script>
+    document.getElementById("upload-button").addEventListener("click", function() {
+        document.getElementById("profile_image").click();
+    });
+
+    document.getElementById("profile_image").addEventListener("change", function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            document.getElementById("image").value = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
 </body>
+
 </html>

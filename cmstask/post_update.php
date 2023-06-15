@@ -33,7 +33,7 @@ if(isset($_POST['submit'])){
         $resultMeta = mysqli_query($conn, $sqlMeta);
         if ($resultMeta) {
             // Update the hashtag in meta_post table
-            $sqlMeta2 = "UPDATE `meta_post` SET `meta_value` = '$hashtag' WHERE `meta_post`.`id` = '$id' AND `meta_key`='hashtag'";
+            $sqlMeta2 = "UPDATE `meta_post` SET `meta_value` = '$hashtag' WHERE `meta_post`.`id` = $id AND `meta_key`='hashtag'";
             $resultMeta2 = mysqli_query($conn, $sqlMeta2);
             if ($resultMeta2) {
                 header("location: viewpost.php");
@@ -42,6 +42,7 @@ if(isset($_POST['submit'])){
         }
     }
 }
+
 
 // Retrieve data from the database
 $sql = "SELECT * FROM `post_table` WHERE `post_id` = $id";
@@ -66,6 +67,7 @@ while ($rowMeta = mysqli_fetch_assoc($resultMeta)) {
     } elseif ($rowMeta['meta_key'] === 'hashtag') {
         $hashtag = $rowMeta['meta_value'];
     }
+
 }
 
 ?>
@@ -145,7 +147,5 @@ while ($rowMeta = mysqli_fetch_assoc($resultMeta)) {
     </form>
 </div>
 
-<?php include "footer.php" ?>
-
-
-
+<?php include "footer.php"
+ ?>

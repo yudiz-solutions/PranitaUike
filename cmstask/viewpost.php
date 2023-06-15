@@ -73,7 +73,7 @@ while ($row = mysqli_fetch_array($result)) {
 
                 ?>
                 <tr>
-                    <th scope="row"><?php echo $num; ?>Heyy</th>
+                    <th scope="row"><?php echo $num; ?></th>
                     <td scope="row"><?php echo $first_name; ?></td>
                     <td scope="row"><?php echo $last_name; ?></td>
                     <td scope="row"><?php echo $email; ?></td>
@@ -83,7 +83,7 @@ while ($row = mysqli_fetch_array($result)) {
                     <td scope="row"><?php echo $hashtag; ?></td>
                     <td>
                         <a href="post_update.php?editid=<?php echo $post_id; ?>"><button class="btn btn-success">Edit</button></a>
-                        <a href="post_delete.php?deleteid=<?php echo $id; ?>"><button class="btn btn-danger">Delete</button></a>
+                        <a href="post_delete.php?deleteid=<?php echo $post_id; ?>"><button class="btn btn-danger">Delete</button></a>
                         </td>
                 </tr>
             <?php
