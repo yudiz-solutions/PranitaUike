@@ -1,15 +1,15 @@
 <?php
-include 'db_conn.php';
-include 'addpost_php.php'; 
 session_start();
 
 // if (isset($_SESSION['username'])) {
-//     header("Location:index.php");
-// }
-?>
+    //     header("Location:index.php");
+    // }
+    ?>
 
 <?php   
+include 'db_conn.php';
 include 'header.php';
+include 'addpost_php.php'; 
 ?> 
 
 <div class="row">

@@ -2,15 +2,17 @@
 include "db_conn.php";
 
 $id = $_GET['editid'];
-if (isset($_POST['submit'])) {
+
+// Check if the form is submitted
+if(isset($_POST['submit'])){
+    // Retrieve form data
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $msg = $_POST['msg'];
-    
     $file = $_FILES['file']['name'];
     $temp_file = $_FILES['file']['tmp_name'];
-    $profile = "./image/" . $file;
+    $profile = "./uploads/".$file;
 
     if (!empty($temp_file)) {
         move_uploaded_file($temp_file, $profile);
@@ -21,69 +23,53 @@ if (isset($_POST['submit'])) {
     $caption = $_POST['caption'];
     $hashtag = $_POST['hashtag'];
 
+    // Update the post_table
     $sql = "UPDATE `post_table` SET `first_name` = '$first_name', `last_name` = '$last_name', `email` = '$email',  `msg` = '$msg',`file` = '$file' WHERE `post_table`.`post_id` = $id";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-
-        $sqlMeta = "UPDATE `meta_post` SET `value` = '$caption' WHERE `meta_post`.`id` = $id AND `key`='caption'";
+        // Update the caption in meta_post table
+        $sqlMeta = "UPDATE `meta_post` SET `meta_value` = '$caption' WHERE `meta_post`.`id` = $id AND `meta_key`='caption'";
         $resultMeta = mysqli_query($conn, $sqlMeta);
         if ($resultMeta) {
-            $sqlMeta2 = "UPDATE `meta_post` SET `value` = '$hashtag' WHERE `meta_post`.`id` = '$id' AND `key`='hashtag'";
+            // Update the hashtag in meta_post table
+            $sqlMeta2 = "UPDATE `meta_post` SET `meta_value` = '$hashtag' WHERE `meta_post`.`id` = '$id' AND `meta_key`='hashtag'";
             $resultMeta2 = mysqli_query($conn, $sqlMeta2);
-            if ($resultMeta2){
+            if ($resultMeta2) {
                 header("location: viewpost.php");
+                exit();
             }
         }
-
     }
 }
 
-$sql2 = "SELECT * FROM `post_table` INNER JOIN `meta_post` ON post_table.post_id = meta_post.id WHERE post_table.post_id = $id";
+// Retrieve data from the database
+$sql = "SELECT * FROM `post_table` WHERE `post_id` = $id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
 
-$result2 = mysqli_query($conn, $sql2);
+$first_name = $row['first_name'];
+$last_name = $row['last_name'];
+$email = $row['email'];
+$msg = $row['msg'];
+$file = $row['file'];
 
-$data = array();
+$sqlMeta = "SELECT * FROM `meta_post` WHERE `id` = $id";
+$resultMeta = mysqli_query($conn, $sqlMeta);
 
-while ($row = mysqli_fetch_array($result2)) {
-    if (!isset($data[$id])) {
-        $data[$id] = array(
-            'first_name' => $row['first_name'],
-            'last_name' => $row['last_name'],
-            'email' => $row['email'],
-            'msg' => $row['msg'],
-            'file' => $row['file'],
-            'caption' => '',
-            'hashtag' => ''
-        );
-    }
-
-    if ($row['key'] === 'caption') {
-        $data[$id]['caption'] = $row['value'];
-    } elseif ($row['key'] === 'hashtag') {
-        $data[$id]['hashtag'] = $row['value'];
-    }
-}
-
-$first_name = ''; // Initialize the variable outside the loop
-$last_name = '';
-$email = '';
-$msg = '';
-$file = '';
 $caption = '';
 $hashtag = '';
 
-foreach ($data as $id => $row) {
-    $first_name = isset($row['first_name']) ? $row['first_name'] : '';
-    $last_name = $row['last_name'];
-    $email = $row['email'];
-    $msg = $row['msg'];
-    $file = $row['file'];
-    $caption = isset($row['caption']) ? $row['caption'] : '';
-    $hashtag = isset($row['hashtag']) ? $row['hashtag'] : '';
+while ($rowMeta = mysqli_fetch_assoc($resultMeta)) {
+    if ($rowMeta['meta_key'] === 'caption') {
+        $caption = $rowMeta['meta_value'];
+    } elseif ($rowMeta['meta_key'] === 'hashtag') {
+        $hashtag = $rowMeta['meta_value'];
+    }
 }
 
 ?>
+
 
 <?php include "header.php" ?>
 
@@ -134,7 +120,7 @@ foreach ($data as $id => $row) {
                 <input type="hidden" name="hidden_file" value="<?php echo $file ?>">
             </div>
         </div><br>
-        
+
         <div class="form-group row">
             <label class="col-md-2 col-form-label text-md-right">Caption</label>
             <div class="col-md-3">
@@ -160,4 +146,6 @@ foreach ($data as $id => $row) {
 </div>
 
 <?php include "footer.php" ?>
+
+
 

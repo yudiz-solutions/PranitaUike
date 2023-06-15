@@ -8,7 +8,7 @@ if(isset($_GET['deleteid'])){
    
     // $sql = "DELETE * FROM post_table WHERE id = '$id'";
     // echo $sql;
-     $sql ="DELETE FROM post_table WHERE `post_table`.`post_id` = $post_id";
+     $sql ="DELETE FROM post_table WHERE `post_table`.`post_id` = $id";
     $result = mysqli_query($conn, $sql);
     if($result){
          

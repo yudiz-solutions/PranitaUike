@@ -33,7 +33,7 @@ $result = mysqli_query($conn, "SELECT * FROM user WHERE id = $id");
 $row = mysqli_fetch_assoc($result);
 ?>
 
-<html lang="en">
+<htmt lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -118,4 +118,7 @@ $row = mysqli_fetch_assoc($result);
 		</div>
 	</form>
 </body>
-</html>
+</htmt>
+
+
+

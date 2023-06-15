@@ -142,7 +142,7 @@ if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
-    $message = $_POST['message'];
+    $msg = $_POST['msg'];
     $caption = $_POST['caption'];
     $hashtag = $_POST['hashtag'];
 
@@ -160,11 +160,11 @@ if (isset($_POST['submit'])) {
     }
 
     // Perform database insertion
-    $query = "INSERT INTO post_table (first_name, last_name, email, message,file, caption, hashtag)
-              VALUES ('$first_name', '$last_name', '$email', '$message', '$file_destination', '$caption', '$hashtag')";
+    $query = "INSERT INTO post_table (first_name, last_name, email, msg,file, caption, hashtag)
+              VALUES ('$first_name', '$last_name', '$email', '$msg', '$file_destination', '$caption', '$hashtag')";
     
     if (mysqli_query($conn, $query)) {
-        // echo  'Data inserted successfully';
+     echo  'Data inserted successfully';
         echo json_encode(['status' => 1]);
         exit;
     } else {

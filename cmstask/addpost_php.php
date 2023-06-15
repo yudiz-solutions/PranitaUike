@@ -3,7 +3,11 @@ include "db_conn.php";
 
 $error = [];
 if (isset($_POST['submit'])) {
+
+    // echo "HEYYYY";
+    // die;
     $first_name = $_POST['first_name'];
+    // echo $first_name;
 
     if (empty($first_name)) {
         $error['first_name'] = "Required";
@@ -42,9 +46,9 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($error)) {
-        $sql = "INSERT INTO `post_table` (`first_name`, `last_name`, `email`, `msg`, `file`) VALUES ('$first_name', '$last_name', '$email', '$msg', '$folder')";
-        
-        if ($result = mysqli_query($conn, $sql)) {
+        $sql_post = "INSERT INTO `post_table` (`first_name`, `last_name`, `email`, `msg`, `file`) VALUES ('$first_name', '$last_name', '$email', '$msg', '$folder')";
+        $result = mysqli_query($conn, $sql_post);
+        if ($result = 1) {
             $last_id = mysqli_insert_id($conn);
             if ($last_id) {
                 echo "Inserted into post_table successfully";
@@ -67,16 +71,22 @@ if (isset($_POST['submit'])) {
             //         continue;
             //     }
                 
-                $sqlMeta_caption = "INSERT INTO `meta_post` (`post_id`, `key`, `value`) VALUES ('$last_id', 'caption', '$caption')";
+                $sqlMeta_caption = "INSERT INTO `meta_post` (`post_id`, `meta_key`, `meta_value`) VALUES ('$last_id', 'caption', '$caption')";
                 $resultMeta_caption = mysqli_query($conn, $sqlMeta_caption);
-                $sqlMeta_hashtag = "INSERT INTO `meta_post` (`post_id`, `key`, `value`) VALUES ('$last_id', 'hashtag', '$hashtag')";
+
+                $sqlMeta_hashtag = "INSERT INTO `meta_post` (`post_id`, `meta_key`, `meta_value`) VALUES ('$last_id', 'hashtag', '$hashtag')";
                 $resultMeta_hashtag = mysqli_query($conn, $sqlMeta_hashtag);
                 if ($resultMeta_caption && $resultMeta_hashtag) {
                 echo "Inserted into meta_table successfully";
-                 header("location: post.php");
+                 header("location: viewpost.php");
                 }
             }
         }
+        else {
+            $conn->error;
+        }
     }
-
+else{
+    echo "Outside";
+}
 ?>

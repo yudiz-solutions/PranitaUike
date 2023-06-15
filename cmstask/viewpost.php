@@ -1,8 +1,15 @@
 <?php
 include "db_conn.php";
 
-$sql = "SELECT * FROM `post_table` INNER JOIN `meta_post` ON post_table.post_id = meta_post.id";
+$sql = "SELECT * FROM `post_table` INNER JOIN `meta_post` ON post_table.post_id = meta_post.post_id";
 $result = mysqli_query($conn, $sql);
+
+// Query error
+// echo "<pre>";
+// print_r($result->num_rows);
+// echo "</pre>";
+
+// die;
 
 $data = array(); // Array to store fetched data
 
@@ -66,7 +73,7 @@ while ($row = mysqli_fetch_array($result)) {
 
                 ?>
                 <tr>
-                    <th scope="row"><?php echo $num; ?></th>
+                    <th scope="row"><?php echo $num; ?>Heyy</th>
                     <td scope="row"><?php echo $first_name; ?></td>
                     <td scope="row"><?php echo $last_name; ?></td>
                     <td scope="row"><?php echo $email; ?></td>

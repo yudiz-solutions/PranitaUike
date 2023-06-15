@@ -59,4 +59,4 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 	</form>
     <p>Don't have an account? <a href="register.php">Sign up</a></p>
 </body>
-</html>
+</html>                      
