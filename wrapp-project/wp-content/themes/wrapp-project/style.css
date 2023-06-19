@@ -1,0 +1,26 @@
+/*
+Theme Name: Wrap Project
+Text Domain : Theme
+Author : Pranita
+Tags : Blog
+Description : Wrapp Theme
+
+*/
+
+*{
+    list-style: none;
+    margin:0;
+    padding: 0;
+}
+
+.col-md-2 {
+    list-style: none;
+    flex: 0 0 auto;
+    width: 16.66666667%;
+}
+
+* {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
