@@ -9,10 +9,8 @@ function my_load_scripts() {
     wp_register_style( 'style2', get_template_directory_uri().'/css/bootstrap.css');
 	wp_enqueue_style ( 'style2');
 
-    wp_register_style( 'style', get_template_directory_uri().'/css/style.css');
+    wp_register_style( 'style', get_template_directory_uri().'/style.css');
 	wp_enqueue_style ( 'style');
-
-
 
     wp_register_style( 'slick2', get_template_directory_uri().'/css/slick-theme.css');
 	wp_enqueue_style ( 'slick2');
@@ -81,7 +79,7 @@ function theme_setup_one_setup(){
 			)
 			);
 			register_nav_menus( array(
-				'header_menu' => __( 'Header Menu', 'textdomain' )
+				'header_menu' => __( 'Header Menu', 'theme' )
 				) );
 				
 				add_theme_support('post-thumbnails');
@@ -104,9 +102,9 @@ function theme_setup_one_setup(){
  */
 function wpdocs_theme_slug_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 1', 'textdomain' ),
+		'name'          => __( 'Footer Sidebar 1', 'theme' ),
 		'id'            => 'footer-sidebar-1',
-		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</li>',
 		'before_title'  => '<h3 class="widgettitle">',
@@ -115,9 +113,9 @@ function wpdocs_theme_slug_widgets_init() {
 
 
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 2', 'textdomain' ),
+		'name'          => __( 'Footer Sidebar 2', 'theme' ),
 		'id'            => 'footer-sidebar-2',
-		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</li>',
 		'before_title'  => '<h3 class="widgettitle">',
@@ -125,9 +123,9 @@ function wpdocs_theme_slug_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 3', 'textdomain' ),
+		'name'          => __( 'Footer Sidebar 3', 'theme' ),
 		'id'            => 'footer-sidebar-3',
-		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</li>',
 		'before_title'  => '<h3 class="widgettitle">',
@@ -135,9 +133,9 @@ function wpdocs_theme_slug_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 4', 'textdomain' ),
+		'name'          => __( 'Footer Sidebar 4', 'theme' ),
 		'id'            => 'footer-sidebar-4',
-		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</li>',
 		'before_title'  => '<h3 class="widgettitle">',
@@ -145,9 +143,9 @@ function wpdocs_theme_slug_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 5', 'textdomain' ),
+		'name'          => __( 'Footer Sidebar 5', 'theme' ),
 		'id'            => 'footer-sidebar-5',
-		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</li>',
 		'before_title'  => '<h3 class="widgettitle">',
@@ -155,9 +153,9 @@ function wpdocs_theme_slug_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 6', 'textdomain' ),
+		'name'          => __( 'Footer Sidebar 6', 'theme' ),
 		'id'            => 'footer-sidebar-6',
-		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</li>',
 		'before_title'  => '<h3 class="widgettitle">',
@@ -231,17 +229,17 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
 
         $labels = array(
-            'name'              => _x( 'Category', 'taxonomy general name', 'textdomain' ),
-            'singular_name'     => _x( 'Category', 'taxonomy singular name', 'textdomain' ),
-            'search_items'      => __( 'Search Category', 'textdomain' ),
-            'all_items'         => __( 'All Category', 'textdomain' ),
-            'parent_item'       => __( 'Parent Category', 'textdomain' ),
-            'parent_item_colon' => __( 'Parent Category:', 'textdomain' ),
-            'edit_item'         => __( 'Edit Category', 'textdomain' ),
-            'update_item'       => __( 'Update Category', 'textdomain' ),
-            'add_new_item'      => __( 'Add New Category', 'textdomain' ),
-            'new_item_name'     => __( 'New Category Name', 'textdomain' ),
-            'menu_name'         => __( 'Category', 'textdomain' ),
+            'name'              => _x( 'Category', 'taxonomy general name', 'theme' ),
+            'singular_name'     => _x( 'Category', 'taxonomy singular name', 'theme' ),
+            'search_items'      => __( 'Search Category', 'theme' ),
+            'all_items'         => __( 'All Category', 'theme' ),
+            'parent_item'       => __( 'Parent Category', 'theme' ),
+            'parent_item_colon' => __( 'Parent Category:', 'theme' ),
+            'edit_item'         => __( 'Edit Category', 'theme' ),
+            'update_item'       => __( 'Update Category', 'theme' ),
+            'add_new_item'      => __( 'Add New Category', 'theme' ),
+            'new_item_name'     => __( 'New Category Name', 'theme' ),
+            'menu_name'         => __( 'Category', 'theme' ),
         );
     
         $args = array(
@@ -259,22 +257,22 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
 
         $labels = array(
-            'name'                       => _x('Type', 'taxonomy general name', 'textdomain'),
-            'singular_name'              => _x('Type', 'taxonomy singular name', 'textdomain'),
-            'search_items'               => __('Search Type', 'textdomain'),
-            'popular_items'              => __('Popular Type', 'textdomain'),
-            'all_items'                  => __('All Type', 'textdomain'),
+            'name'                       => _x('Type', 'taxonomy general name', 'theme'),
+            'singular_name'              => _x('Type', 'taxonomy singular name', 'theme'),
+            'search_items'               => __('Search Type', 'theme'),
+            'popular_items'              => __('Popular Type', 'theme'),
+            'all_items'                  => __('All Type', 'theme'),
             'parent_item'                => null,
             'parent_item_colon'          => null,
-            'edit_item'                  => __('Edit Writer', 'textdomain'),
-            'update_item'                => __('Update Writer', 'textdomain'),
-            'add_new_item'               => __('Add New Writer', 'textdomain'),
-            'new_item_name'              => __('New Writer Name', 'textdomain'),
-            'separate_items_with_commas' => __('Separate Type with commas', 'textdomain'),
-            'add_or_remove_items'        => __('Add or remove Type', 'textdomain'),
-            'choose_from_most_used'      => __('Choose from the most used Type', 'textdomain'),
-            'not_found'                  => __('No Type found.', 'textdomain'),
-            'menu_name'                  => __('Type', 'textdomain'),
+            'edit_item'                  => __('Edit Writer', 'theme'),
+            'update_item'                => __('Update Writer', 'theme'),
+            'add_new_item'               => __('Add New Writer', 'theme'),
+            'new_item_name'              => __('New Writer Name', 'theme'),
+            'separate_items_with_commas' => __('Separate Type with commas', 'theme'),
+            'add_or_remove_items'        => __('Add or remove Type', 'theme'),
+            'choose_from_most_used'      => __('Choose from the most used Type', 'theme'),
+            'not_found'                  => __('No Type found.', 'theme'),
+            'menu_name'                  => __('Type', 'theme'),
         );
     
         $args = array(

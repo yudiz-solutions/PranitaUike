@@ -91,7 +91,7 @@
 </body>
 </html>
 <?php
-get_footer();
+WP_footer();
 ?>
 
 
