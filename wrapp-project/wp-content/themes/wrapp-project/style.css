@@ -582,10 +582,11 @@ a{
 }
 /* alternate chages */
 .brainstorm-now {
-    background: url('../images/brainstorm-footer.svg') no-repeat left center / contain, url('../images/iphones-footer.svg') no-repeat right center / contain, #4C1D95;
+    background: url('./images/brainstorm-footer.svg') no-repeat left center / contain, url('./images/iphones-footer.svg') no-repeat right center / contain, #4C1D95;
     /* margin-top: -160px; */
     z-index: 10;
     position: relative;
+
 }
 .brainstorm-now p {
     color: #ffffff;
