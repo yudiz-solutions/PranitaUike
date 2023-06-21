@@ -78,6 +78,7 @@ function theme_setup_one_setup(){
 			'unlink-homepage-logo' => true,
 			)
 			);
+
 			register_nav_menus( array(
 				'header_menu' => __( 'Header Menu', 'theme' )
 				) );
@@ -85,10 +86,10 @@ function theme_setup_one_setup(){
 				add_theme_support('post-thumbnails');
 				
 			}
-			
-			add_action( 'after_setup_theme', 'theme_setup_one_setup' );
-			
 
+            add_action( 'after_setup_theme', 'theme_setup_one_setup' );
+			
+            
 			// svg image 
 			function cc_mime_types( $mimes ){
 				$mimes['svg'] = 'image/svg+xml';
@@ -102,13 +103,13 @@ function theme_setup_one_setup(){
  */
 function wpdocs_theme_slug_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Footer Sidebar 1', 'theme' ),
+		'name'          => __( 'Footer Sidebar 1 ', 'theme' ),
 		'id'            => 'footer-sidebar-1',
 		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li>',
-		'before_title'  => '<h3 class="widgettitle">',
-		'after_title'   => '</h3>',
+		'before_widget' => '<ul>',  // '<li id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</ul>',
+		'before_title'  => '<li>',
+		'after_title'   => '</li>',
 	) );
 
 
@@ -116,53 +117,54 @@ function wpdocs_theme_slug_widgets_init() {
 		'name'          => __( 'Footer Sidebar 2', 'theme' ),
 		'id'            => 'footer-sidebar-2',
 		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li>',
-		'before_title'  => '<h3 class="widgettitle">',
-		'after_title'   => '</h3>',
+		'before_widget' => '<ul>',
+		'after_widget'  => '</ul>',
+		'before_title'  => '<li>',
+		'after_title'   => '</li>',
 	) );
 
 	register_sidebar( array(
 		'name'          => __( 'Footer Sidebar 3', 'theme' ),
 		'id'            => 'footer-sidebar-3',
 		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li>',
-		'before_title'  => '<h3 class="widgettitle">',
-		'after_title'   => '</h3>',
+		'before_widget' => '<ul>',
+		'after_widget'  => '</ul>',
+		'before_title'  => '<li>',
+		'after_title'   => '</li>',
 	) );
 
 	register_sidebar( array(
 		'name'          => __( 'Footer Sidebar 4', 'theme' ),
 		'id'            => 'footer-sidebar-4',
 		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li>',
-		'before_title'  => '<h3 class="widgettitle">',
-		'after_title'   => '</h3>',
+		'before_widget' => '<ul>',
+		'after_widget'  => '</ul>',
+		'before_title'  => '<li>',
+		'after_title'   => '</li>',
 	) );
 
 	register_sidebar( array(
 		'name'          => __( 'Footer Sidebar 5', 'theme' ),
 		'id'            => 'footer-sidebar-5',
 		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li>',
-		'before_title'  => '<h3 class="widgettitle">',
-		'after_title'   => '</h3>',
+		'before_widget' => '<ul>',
+		'after_widget'  => '</ul>',
+		'before_title'  => '<li>',
+		'after_title'   => '</li>',
 	) );
 
 	register_sidebar( array(
 		'name'          => __( 'Footer Sidebar 6', 'theme' ),
 		'id'            => 'footer-sidebar-6',
 		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'theme' ),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li>',
-		'before_title'  => '<h3 class="widgettitle">',
-		'after_title'   => '</h3>',
+		'before_widget' => '<ul>',
+		'after_widget'  => '</ul>', 
+		'before_title'  => '<li>',
+		'after_title'   => '</li>',
 	) );
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
+//hook and function menu
 
 //side bar end //
 
@@ -181,14 +183,14 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
             'name'                => _x( 'story', 'Post Type General Name', 'twentytwentyone' ),
             'singular_name'       => _x( 'story', 'Post Type Singular Name', 'twentytwentyone' ),
             'menu_name'           => __( 'story', 'twentytwentyone' ),
-            'parent_item_colon'   => __( 'Parent storage', 'twentytwentyone' ),
-            'all_items'           => __( 'All storages', 'twentytwentyone' ),
-            'view_item'           => __( 'View storage', 'twentytwentyone' ),
-            'add_new_item'        => __( 'Add New storage', 'twentytwentyone' ),
+            'parent_item_colon'   => __( 'Parent story', 'twentytwentyone' ),
+            'all_items'           => __( 'All story', 'twentytwentyone' ),
+            'view_item'           => __( 'View story', 'twentytwentyone' ),
+            'add_new_item'        => __( 'Add New story', 'twentytwentyone' ),
             'add_new'             => __( 'Add New', 'twentytwentyone' ),
-            'edit_item'           => __( 'Edit storage', 'twentytwentyone' ),
-            'update_item'         => __( 'Update storage', 'twentytwentyone' ),
-            'search_items'        => __( 'Search storage', 'twentytwentyone' ),
+            'edit_item'           => __( 'Edit story', 'twentytwentyone' ),
+            'update_item'         => __( 'Update story', 'twentytwentyone' ),
+            'search_items'        => __( 'Search story', 'twentytwentyone' ),
             'not_found'           => __( 'Not Found', 'twentytwentyone' ),
             'not_found_in_trash'  => __( 'Not found in Trash', 'twentytwentyone' ),
         );
@@ -285,7 +287,7 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
             'rewrite'               => array('slug' => 'news-type'),
         );
     
-        register_taxonomy('news-type', 'storage', $args);
+        register_taxonomy('news-type', 'story', $args);
 		flush_rewrite_rules();
     }
       
@@ -293,3 +295,4 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
     add_theme_support('custom-support');
 
 ?>
+ 
