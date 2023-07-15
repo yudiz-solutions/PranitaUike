@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <rect id="Rectangle-27" fill="#D8D8D8" opacity="0" x="0" y="0" width="48" height="48"></rect>
+            <polyline id="Rectangle-25-Copy" stroke="#FFFFFF" stroke-width="2" points="11 43 11 8.56445312 33.4267578 2.21801758 33.4267578 8.94165039"></polyline>
+            <rect id="Rectangle-25" stroke="#FFFFFF" stroke-width="2" x="11" y="9" width="26" height="34"></rect>
+            <g id="Group" transform="translate(16.000000, 15.000000)" stroke="#FFFFFF" stroke-width="2">
+                <circle id="Oval" cx="8" cy="8" r="8"></circle>
+                <ellipse id="Oval-Copy" cx="8" cy="8" rx="3" ry="8"></ellipse>
+                <path d="M1,8 L15.4921277,8" id="Path-3"></path>
+            </g>
+            <path d="M18,35 L30.8287326,35" id="Path-4" stroke="#FFFFFF" stroke-width="2"></path>
+            <path d="M20,39 L29,39" id="Path-4-Copy" stroke="#FFFFFF" stroke-width="2"></path>
+        </g>
+    </g>
+</svg>
